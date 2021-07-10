@@ -45,11 +45,10 @@ export class ProductsController {
 
   @Delete(':id')
   remove(@Param('id') id: string): Promise<Product> {
+    console.log(id)
     return this.productsService.remove(id)
   }
 
-  
- 
 
   @Put(':id')
   update(@Body() updateProductDto: UpdateProductDto, @Param('id') id: string): Promise<Product> {

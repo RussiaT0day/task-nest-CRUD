@@ -95,20 +95,8 @@ export default function From({text}) {
 
 
 	function addProduct() {
-
 		if (!categorySelect || !name) return
-
 		dispatch(setProductsThunck({category:categorySelect, name,createAt: new Date().toString()}))
-
-		// fetch('http://localhost:3002/products', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json;charset=utf-8'
-		// 	},	
-		// 	body: JSON.stringify({name, category:categorySelect, createAt: new Date().toLocaleString()})
-		// })
-		// .then(()=>{ getCategory()})
-		
 	}
 
 	return (
@@ -138,12 +126,8 @@ export default function From({text}) {
 							{el.name}
 						</MenuItem>)}
 				</Select>
-				<button
-					onClick={() => addProduct()}
-					category={categorySelect}
-					name={name}
-				>добавить</button>
 				<Button
+					func={addProduct}
 					text='Добавить продукт'
 					color='primary'
 				/>

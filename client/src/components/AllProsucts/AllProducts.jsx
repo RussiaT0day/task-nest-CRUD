@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useState, useEffect } from 'react';
-import { getProductsThunck } from '../../redux/actions/productsAC'
+import { getProductsThunck, removeProductsThunck } from '../../redux/actions/productsAC'
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,6 +9,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import Button from '../Button/Button';
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,8 +35,9 @@ export default function AllProducts() {
 	}, [])
 
 
-	function deleteProduct(e) {
-		console.log(e.target.id);
+	function deleteProduct(param) {
+		console.log(param);
+		dispatch(removeProductsThunck({id:param}))
 	}
 
 
@@ -44,8 +47,9 @@ export default function AllProducts() {
 				return <>
 					<ListItem button>
 						<ListItemText primary={el.name} />
-						<button data-id={el.id} onClick={e=> deleteProduct(e)}></button>
-						<Button text='Удалить' color='secondary' func={deleteProduct}/>
+							{/* <button data-id={el._id} onClick={e => deleteProduct(e)}>
+								Удалить</button> */}
+						<Button id={el._id} text='Удалить' color='secondary' func={deleteProduct} />
 					</ListItem>
 					<Divider />
 				</>

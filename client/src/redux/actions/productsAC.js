@@ -37,6 +37,12 @@ export const getProductsThunck = () => async (dispatch) => {
     dispatch(getProductsActions(res.data))
 }
 
+export const removeProductsThunck = ({id}) => async (dispatch) => {
+    const res = await axios.delete(`http://localhost:3002/products/${id}`);
+    dispatch(removeProductsActions(id))
+}
+
+
 
 
 
