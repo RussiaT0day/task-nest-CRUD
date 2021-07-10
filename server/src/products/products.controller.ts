@@ -15,11 +15,6 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductsService } from './products.service';
 import { Product } from './schemas/product.schema';
 
-// express
-// app.use((req, res, next) => {
-//   res.status(201).end('Poka')
-// })
-
 @Controller('products')
 export class ProductsController {
 
