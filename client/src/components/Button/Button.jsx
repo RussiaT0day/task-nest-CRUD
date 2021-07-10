@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ContainedButtons({ color, text, id ,func }) {
 	const classes = useStyles();
 	return (
-			<Button  onClick={() => func(id)} variant="contained" color={color}>
+			<Button  onClick={() => func(id)} variant="contained" color={color} style={{margin:"5px"}}>
 				{text}
 			</Button>
 	);

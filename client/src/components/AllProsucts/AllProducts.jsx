@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useState, useEffect } from 'react';
-import { getProductsThunck, removeProductsThunck,editProductsThunck } from '../../redux/actions/productsAC'
-
-
+import { getProductsThunck, removeProductsThunck, editProductsThunck } from '../../redux/actions/productsAC'
+import InputBase from '@material-ui/core/InputBase';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -41,13 +40,13 @@ export default function AllProducts() {
 	}
 
 	function toggle(params = null) {
-		
+
 		setEditId(params)
 		setEditShow(!editShow)
 		if (!editId || !name) return
-		else{
+		else {
 			console.log('work');
-			dispatch(editProductsThunck({id:editId, name, updateAt: new Date().toLocaleString()}))
+			dispatch(editProductsThunck({ id: editId, name, updateAt: new Date().toLocaleString() }))
 			setName('')
 		}
 	}
@@ -56,18 +55,22 @@ export default function AllProducts() {
 
 
 	return (
-		<List component="nav" className={classes.root} aria-label="mailbox folders">
+
+		<List component="nav" className={classes.root} aria-label="mailbox folders" className='list-all-product' >
 			{products.map(el => {
 				if (el._id === editId)
-				return <ListItem >
-						<input type="text" value={name} placeholder={el.name} onChange={(e)=>setName(e.target.value)} />
+					return <ListItem >
+						<ListItemText  >
+
+						<input type="text" value={name} placeholder={el.name} onChange={(e) => setName(e.target.value)} />
+						</ListItemText>
 						<Button text='Сохранить' func={() => toggle()} />
 						<Button id={el._id} text='Удалить' color='secondary' func={deleteProduct} />
 					</ListItem>
 				return <>
 					<ListItem >
-							<ListItemText primary={el.name} />
-						{editShow ? '' : <Button text='Редактировать' func={() => toggle(el._id)} /> }
+						<ListItemText primary={`Название: ${el.name}`} />
+						{editShow ? '' : <Button text='Редактировать' func={() => toggle(el._id)} />}
 						<Button id={el._id} text='Удалить' color='secondary' func={deleteProduct} />
 					</ListItem>
 					<Divider />

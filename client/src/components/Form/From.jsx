@@ -10,26 +10,26 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 import Button from '../Button/Button';
 import { Typography } from '@material-ui/core';
-import { setProductsThunck} from '../../redux/actions/productsAC'
+import { setProductsThunck } from '../../redux/actions/productsAC'
 
 
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		'& > *': {
-			margin: theme.spacing(1),
+			margin: theme.spacing(2),
 			width: '25ch',
 		},
 	},
 	margin: {
-		margin: theme.spacing(1),
+		margin: theme.spacing(2),
 	},
 }));
 
 const BootstrapInput = withStyles((theme) => ({
 	root: {
 		'label + &': {
-			marginTop: theme.spacing(3),
+			marginTop: theme.spacing(5),
 		},
 	},
 	input: {
@@ -62,14 +62,14 @@ const BootstrapInput = withStyles((theme) => ({
 }))(InputBase);
 
 
-export default function From({text}) {
+export default function From({ text }) {
 	const classes = useStyles();
 
-	
+
 	const [categorySelect, setCategorySelect] = useState('')
 	const [name, setName] = useState('')
 	const [category, setCategory] = useState([])
-	
+
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -87,14 +87,14 @@ export default function From({text}) {
 
 	function getCategory() {
 		fetch('http://localhost:3002/category')
-		.then(res => res.json())
-		.then(res => setCategory(res))
+			.then(res => res.json())
+			.then(res => setCategory(res))
 	}
 
 
 	function addProduct() {
 		if (!categorySelect || !name) return
-		dispatch(setProductsThunck({category:categorySelect, name,createAt: new Date().toString()}))
+		dispatch(setProductsThunck({ category: categorySelect, name, createAt: new Date().toString() }))
 	}
 
 	return (
@@ -124,12 +124,16 @@ export default function From({text}) {
 							{el.name}
 						</MenuItem>)}
 				</Select>
-				<Button
-					func={addProduct}
-					text='Добавить продукт'
-					color='primary'
-				/>
+			<Button
+						func={addProduct}
+						text='Добавить продукт'
+						color='primary'
+					/>
+
 			</FormControl>
+
+
+
 
 		</div>
 	);
