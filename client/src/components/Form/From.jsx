@@ -85,8 +85,6 @@ export default function From({text}) {
 	};
 
 
-
-
 	function getCategory() {
 		fetch('http://localhost:3002/category')
 		.then(res => res.json())

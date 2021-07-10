@@ -38,10 +38,16 @@ export const getProductsThunck = () => async (dispatch) => {
 }
 
 export const removeProductsThunck = ({id}) => async (dispatch) => {
-    const res = await axios.delete(`http://localhost:3002/products/${id}`);
+    console.log(id);
+    await axios.delete(`http://localhost:3002/products/${id}`);
     dispatch(removeProductsActions(id))
 }
 
+
+export const editProductsThunck = ({id,name,updateAt,category}) => async (dispatch) => {
+    const res = await axios.put(`http://localhost:3002/products/${id}`,{name,updateAt,category});
+    dispatch(editProductsActions({_id:id,name,updateAt,category}))
+}
 
 
 

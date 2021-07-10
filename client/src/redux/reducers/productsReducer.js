@@ -10,7 +10,7 @@ const productReducer = (state = [], action) => {
             return state.filter(el => el._id !== action.payload);
         case EDIT_PRODUCTS:
             return state.map(el => {
-                if (el.id === action.payload) {
+                if (el._id === action.payload._id) {
                     el = action.payload
                 }
                 return el
