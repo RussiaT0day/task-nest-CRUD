@@ -1,0 +1,7 @@
+export const GET_PRODUCTS = 'GET_DATAMONEY';
+export const SET_PRODUCTS = 'SET_PRODUCTS';
+export const REMOVE_PRODUCTS = 'REMOVE_PRODUCTS';
+export const EDIT_PRODUCTS = 'EDIT_PRODUCTS';
+
+
+

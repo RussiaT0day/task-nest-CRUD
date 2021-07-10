@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import TextField from '@material-ui/core/TextField';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -8,6 +9,8 @@ import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 import Button from '../Button/Button';
+import { Typography } from '@material-ui/core';
+import { setProductsThunck} from '../../redux/actions/productsAC'
 
 
 
@@ -59,43 +62,60 @@ const BootstrapInput = withStyles((theme) => ({
 }))(InputBase);
 
 
-export default function From() {
+export default function From({text}) {
 	const classes = useStyles();
 
+	
 	const [categorySelect, setCategorySelect] = useState('')
 	const [name, setName] = useState('')
+	const [category, setCategory] = useState([])
+	
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		getCategory()
+	}, [])
 
 	const categoryChange = (event) => {
 		setCategorySelect(event.target.value);
 	};
+
 	const nameChange = (event) => {
 		setName(event.target.value);
 	};
 
-	const [category, setCategory] = useState([])
 
-	useEffect(() => {
+
+
+	function getCategory() {
 		fetch('http://localhost:3002/category')
-			.then(res => res.json())
-			.then(res => setCategory(res))
-	}, [])
+		.then(res => res.json())
+		.then(res => setCategory(res))
+	}
+
 
 	function addProduct() {
-		fetch('http://localhost:3002/category', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8'
-			},
-			body: JSON.stringify({name, category:categorySelect, createAt: new Date().toLocaleString()})
-		})
-		.then(()=>{ console.log('work');})
+
+		if (!categorySelect || !name) return
+
+		dispatch(setProductsThunck({category:categorySelect, name,createAt: new Date().toString()}))
+
+		// fetch('http://localhost:3002/products', {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Content-Type': 'application/json;charset=utf-8'
+		// 	},	
+		// 	body: JSON.stringify({name, category:categorySelect, createAt: new Date().toLocaleString()})
+		// })
+		// .then(()=>{ getCategory()})
 		
 	}
 
 	return (
 		<div>
+			<Typography variant="h5"  >{text}</Typography>
 			<FormControl className={classes.margin}>
-				<InputLabel htmlFor="demo-customized-textbox" >Название</InputLabel>
+				<InputLabel htmlFor="demo-customized-textbox" >Описание</InputLabel>
 				<BootstrapInput id="demo-customized-textbox" onChange={nameChange} value={name} />
 			</FormControl>
 			<FormControl className={classes.margin}>
